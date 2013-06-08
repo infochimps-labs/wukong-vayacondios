@@ -9,7 +9,11 @@ module Wukong
           yield get(input)
         else
           request = perform_action(record)
-          yield get( request.is_a?(Hash) ? request : *request)
+          if request.is_a?(Hash)
+            yield get(request)
+          else
+            yield get(*request)
+          end
         end
       end
 
@@ -25,7 +29,11 @@ module Wukong
 
       def process record
         request = perform_action(record)
-        announce( request.is_a?(Hash) ? request : *request)
+        if request.is_a?(Hash)
+          announce(request)
+        else
+          announce(*request)
+        end
       end
 
       def perform_action record
@@ -44,9 +52,17 @@ module Wukong
       def process record
         request = perform_action(record)
         if clobber
-          set!( request.is_a?(Hash) ? request : *request)
+          if request.is_a?(Hash)
+            set!(request)
+          else
+            set!(*request)
+          end
         else
-          set( request.is_a?(Hash) ? request : *request)
+          if request.is_a?(Hash)
+            set(request)
+          else
+            set(*request)
+          end
         end
       end
 
