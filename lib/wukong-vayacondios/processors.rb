@@ -2,9 +2,15 @@ module Wukong
   class Processor
 
     class Lookup < Processor
-      field :topic, String, doc: "Default topic for records"
+      field :input, Whatever, doc: "Fixed request to return"
+      field :topic, String,   doc: "Default topic for records"
       def process record
-        yield get(*perform_action(record))
+        if input
+          yield get(input)
+        else
+          request = perform_action(record)
+          yield get( request.is_a?(Hash) ? request : *request)
+        end
       end
 
       def perform_action record
@@ -18,7 +24,8 @@ module Wukong
       field :topic, String,   doc: "Default topic for records"
 
       def process record
-        announce(*perform_action(record))
+        request = perform_action(record)
+        announce( request.is_a?(Hash) ? request : *request)
       end
 
       def perform_action record
@@ -35,10 +42,11 @@ module Wukong
       field :clobber, :boolean, default: false, doc: "When writing configs, whether to overwrite.  Default behavior is to merge."
 
       def process record
+        request = perform_action(record)
         if clobber
-          set!(*perform_action(record))
+          set!( request.is_a?(Hash) ? request : *request)
         else
-          set(*perform_action(record))
+          set( request.is_a?(Hash) ? request : *request)
         end
       end
 
