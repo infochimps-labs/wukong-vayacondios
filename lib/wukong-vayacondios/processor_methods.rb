@@ -27,7 +27,7 @@ module Wukong
         end
       end
       
-      %w[announce get set set! delete].each do |client_method|
+      %w[announce events get stashes set set! delete].each do |client_method|
         define_method client_method do |*args|
           vayacondios_client.send(client_method, *args)
         end
