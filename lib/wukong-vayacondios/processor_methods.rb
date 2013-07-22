@@ -2,6 +2,10 @@ module Wukong
   module Vayacondios
 
     module ProcessorInstanceMethods
+
+      def vcd_topic
+        "processors.#{label}"
+      end
       
       def vcd_topic_for_record record
         case
@@ -42,13 +46,13 @@ module Wukong
 
       def update_settings
         self.class.fields.each_pair do |name, field|
-          self.send("#{field}=", value) if value = get("processor.#{label}", field)
+          self.send("#{field}=", value) if value = get(vcd_topic, field)
         end
       end
 
       def save_settings
         self.class.fields.each_pair do |name, field|
-          set("processor.#{label}", value) if value = send(field)
+          set(vcd_topic, value) if value = send(field)
         end
       end
 
