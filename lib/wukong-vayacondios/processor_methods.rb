@@ -4,7 +4,7 @@ module Wukong
     module ProcessorInstanceMethods
 
       def vcd_topic
-        "processors.#{label}"
+        "processors.#{Wukong::Deploy.settings[:application]}-#{label}"
       end
       
       def vcd_topic_for_record record
