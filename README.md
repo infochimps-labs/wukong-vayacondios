@@ -1,4 +1,4 @@
-= Wukong-Vayacondios
+# Wukong-Vayacondios
 
 This Wukong plugin integrates Wukong with
 [Vayacondios](http://github.com/infochimps-labs/vayacondios/tree/leslie).
@@ -9,7 +9,7 @@ It provides
 * methods for the [Processor](http://github.com/infochimps-labs/wukong/tree/leslie/lib/wukong/processor.rb) class to announce/search events and set/get/delete/search stashes.
 * new processors which announce events and set stashes on each input record for use in flows
 
-== Installation
+## Installation
 
 To include the Wukong-Vayacondios plugin in your deploy pack, first
 add it to your Gemfile:
@@ -29,7 +29,7 @@ configured the environment of your deploy pack).
 require 'wukong-vayacondios'
 ```
 
-== Default Vayacondios Client
+## Default Vayacondios Client
 
 Wukong-Vayacondios provides a default
 [Vayacondios::Client](https://github.com/infochimps-labs/vayacondios/blob/leslie/lib/vayacondios/client/client.rb)
@@ -37,7 +37,7 @@ at `Wukong::Deploy.vayacondios_client`.  This client object is
 automatically initialized and configured during the startup of any
 `wu-*`-tool.
 
-=== Configuration
+### Configuration
 
 The default Vayacondios client is configured by the following settings
 which should appear on all `wu-*`-tools if Wukong-Vayacondios is
@@ -63,7 +63,7 @@ vcd: true
 then all interactions with Vayacondios using the default client will
 be in "dry run" mode -- logging but not performing any requests.
 
-=== Usage
+### Usage
 
 Once the Wukong environment has booted and code in your processor or
 model is running you can directly interact with the Vayacondios client
@@ -81,7 +81,7 @@ It's more common to write to Vayacondios from processors or dataflows
 which is why convenience methods and classes have already been created
 for those contexts, as detailed in the next sections.
 
-== New Processor Methods
+## New Processor Methods
 
 The following methods are now added to the [Wukong::Processor](http://github.com/infochimps-labs/wukong/tree/leslie/lib/wukong/processor.rb) class
 
@@ -98,7 +98,7 @@ The following methods are now added to the [Wukong::Processor](http://github.com
 
 Each method delegates to the corresponding method of [Vayacondios::Client](https://github.com/infochimps-labs/vayacondios/blob/leslie/lib/vayacondios/client/client.rb).
 
-== New Processors
+## New Processors
 
 The following new processors are defined:
 
